@@ -207,3 +207,87 @@ function abc(number){
 
 output = abc(2) + abc(3);
 console.log(output);
+
+// Day 1: Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to the target.
+function twoSum(array, target){
+    let temp = 0;
+    let newArr = [];
+    for(let i = 0; i < array.length; i ++){
+        if(array[i] < target){
+            newArr.push(array[i]);
+        }
+    }
+    for(let i = 0; i < newArr.length; i ++){
+        for(let j = 0; j < newArr.length; j ++){
+            if(target == newArr[i] + newArr[j]){
+                return [i, j];
+            }
+        }
+    }
+}
+
+//Day 2: Given a sorted array nums, remove the duplicates in place such that each element appears only once and returns the new length.
+function removeDuplicates(array){
+    for(let i = 0; i < array.length; i++){
+        for(let j = 1; j < array.length; j++){
+            let indexToDelete;
+            if(array[i] == array[j] + 1){
+                indexToDelete = array[j];
+                array = array.filter( (item, index) => {
+                    if(index !== indexToDelete){
+                        return item;
+                    } else {
+                        i++;
+                    }
+                })
+            } 
+        }
+    }
+    return (array.length);
+}
+console.log(removeDuplicates([1,1,2,3,3,4,5,5,5,6]));
+
+//(How to use .filter) 
+let array = [1,2,3,4,5];
+let indexToDelete = 1;
+let newArray = array.filter( (item, index) => {
+    if(index !== indexToDelete){
+        return item;
+    }
+})
+console.log(newArray);
+
+// Determine whether an integer is a palindrome
+function isPalindrome(x){
+    let char = x.toString();
+    let i = 0;
+    let j = char.length - 1;
+    while(i <= j){
+        if(!(char[i++] === char[j--])){
+            return false;
+        }
+    }
+    return true;
+}
+console.log(isPalindrome([1,2,1]));
+
+//Determine whether an array is a palindrome 
+function arrayPalindrome(array){
+    let len = array.length;
+    for(let i = 0; i < array.length/2; i++){
+        if(array[i] !== array[len - i - 1]){
+            return false;
+        }
+    }
+    return true;
+}
+console.log(arrayPalindrome([1,2,1]));
+
+
+//how to iterate through an array backwards
+function backwards(array){
+    for(let i = array.length - 1; i >= 0; i--){
+        console.log(array[i]);
+    }
+}
+backwards([1,2,3,4]);
