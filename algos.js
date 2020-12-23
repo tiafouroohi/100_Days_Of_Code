@@ -226,6 +226,19 @@ function twoSum(array, target){
     }
 }
 
+function twoSum(array, target){
+    let newArr = [];
+    for(let i=0; i<array.length; i++){
+        for(let j = i + 1; i<array.length; i++){
+            if(array[j] == target - array[i]){
+                newArr.push(array[j], array[i]);
+            }
+        }
+    }
+    console.log(newArr);
+}
+twoSum([0,2,5,9,11], 2);
+
 //Day 2: Given a sorted array nums, remove the duplicates in place such that each element appears only once and returns the new length.
 function removeDuplicates(array){
     for(let i = 0; i < array.length; i++){
@@ -275,13 +288,13 @@ console.log(isPalindrome([1,2,1]));
 function arrayPalindrome(array){
     let len = array.length;
     for(let i = 0; i < array.length/2; i++){
-        if(array[i] !== array[len - i - 1]){
+        if(array[i] !== array[len - i - 1]){ //if array[i] is not equal to length of the array - i - 1 ... 
             return false;
         }
     }
     return true;
 }
-console.log(arrayPalindrome([1,2,1]));
+console.log(arrayPalindrome([8,3,7,6,7,3,8]));
 
 
 //how to iterate through an array backwards
@@ -291,3 +304,149 @@ function backwards(array){
     }
 }
 backwards([1,2,3,4]);
+
+// Day 3: Given a string containing the characters ( ) { } [ ] determine if the string input is valid
+function validParenthesis(string){
+    if(string.length %2!==0){
+        return false;
+    }
+    let map = {
+        "(" : ")",
+        "{" : "}",
+        "[" : "]",
+    }
+    let stack = [];
+    for(let i = 0; i<string.length; i++){
+        if(map[string[i]]){ //if it matches a left bracket
+            stack.unshift(string[i]); //adds to the beginning of an array;
+            console.log(stack);
+        } else {
+            if(string[i] != map[stack.shift()]){  //not a left bracket, doesn't match top of stack
+                return false;
+            }
+        }
+    }
+    return true;
+}
+console.log(validParenthesis("({[()]})"));
+
+// Given a string, determine if it is a palindrome
+function palindrome(string){
+    let len = string.length;
+    for(let i = 0; i < string.length; i++){
+        if(string[i] != string[len - i - 1]){
+            return false;
+        }
+    }
+    return true;
+}
+console.log(palindrome("amanaplanacanalpanama"));
+
+// given a string, determine if it is a palindrome ignoring upperccases and special characters
+function palindrome(string){
+    let len = string.length;
+    let str = string.toLowerCase();
+    for(let i = 0; i < str.length/2; i ++){
+        if(str[i] != str[len - i - 1]){
+            return false;
+        }
+    }
+    return true;
+}
+console.log(palindrome("Racecar"));
+
+
+
+
+
+
+
+// Given an array, sort it in place without creating a new array
+function sortArray(array){
+    let temp;
+    for(let i = 0; i < array.length; i++){
+        for(let j = i + 1; j < array.length; j++){
+            if(array[i] > array[j]){
+                temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                
+            }
+        }
+    }
+    return array;
+}
+console.log(sortArray([100,1,3,2,20,5,9,18,]));
+
+// Given two sorted integer arrays, arr1 and arr2, merge arr2 into arr1 as one sorted array
+function oneArray(arr1, arr2){
+    let newArr = [];
+    for(let i = 0; i < arr1.length; i++){
+        for(let j = 0; j < arr2.length; j++){
+            if(arr2[j] < arr1[i]){
+                newArr.push(arr2[j]);
+                j ++;
+            } 
+            if(arr2[j] == arr1[i]){
+                newArr.push(arr2[j]);
+            }
+            if(arr2[j] > arr1[i]){
+                continue;
+            }
+        }
+    }
+    return newArr;
+}
+console.log(oneArray([1,2,3,4], [1,2,3,4]));
+
+
+
+
+// ordered union
+function orderedUnion(arr1, arr2){
+    let i = 0;
+    let j = 0;
+    let newArr = [];
+    while( i < arr1.length && j < arr2.length){
+        if(arr1[i] < arr2[j]){
+            newArr.push(arr1[i]);
+            i ++;
+        } else if(arr2[j] < arr1[i]){
+            newArr.push(arr2[j]);
+            j ++;
+        } else {
+            newArr.push(arr2[j]);
+            j ++;
+            i ++;
+        }
+    }
+    newArr = newArr.concat(arr1.slice(i).concat(arr2.slice(j)));
+    return newArr;
+}
+console.log(orderedUnion([1,2,2,2,3,4], [2,2,3,4,4,5]));
+
+
+// Length of last word: Given a string consists of some words separated by spaces, return the length of the last word in the string. If the last word does not exist, return 0
+function lastWord(string){
+    let badChar = " ";
+    let count = 0;
+    for(let i = string.length - 1; i >= 0; i--){
+        if(string.length < 1){
+            return 0;
+        } else if(string[i] === badChar){
+            break;
+        } else {
+            count ++;
+        }
+    }
+    return count;
+}
+console.log(lastWord("Hi Tony. What's up"));
+
+// Plus One: Given a non empty array of integers, increment by one integer.
+function incrementInteger(array){
+    array[array.length - 1] += 1;
+    return array;
+}
+console.log(incrementInteger([8,6,7]));
+
