@@ -355,12 +355,6 @@ function palindrome(string){
 }
 console.log(palindrome("Racecar"));
 
-
-
-
-
-
-
 // Given an array, sort it in place without creating a new array
 function sortArray(array){
     let temp;
@@ -377,30 +371,6 @@ function sortArray(array){
     return array;
 }
 console.log(sortArray([100,1,3,2,20,5,9,18,]));
-
-// Given two sorted integer arrays, arr1 and arr2, merge arr2 into arr1 as one sorted array
-function oneArray(arr1, arr2){
-    let newArr = [];
-    for(let i = 0; i < arr1.length; i++){
-        for(let j = 0; j < arr2.length; j++){
-            if(arr2[j] < arr1[i]){
-                newArr.push(arr2[j]);
-                j ++;
-            } 
-            if(arr2[j] == arr1[i]){
-                newArr.push(arr2[j]);
-            }
-            if(arr2[j] > arr1[i]){
-                continue;
-            }
-        }
-    }
-    return newArr;
-}
-console.log(oneArray([1,2,3,4], [1,2,3,4]));
-
-
-
 
 // ordered union
 function orderedUnion(arr1, arr2){
@@ -449,4 +419,44 @@ function incrementInteger(array){
     return array;
 }
 console.log(incrementInteger([8,6,7]));
+
+//Day 4: Move Zeroes: Given an array, move all 0s to the end while mainting the relative order of the non zero elements
+
+function moveZeroes(array){
+    let temp;
+    for(let i = array.length - 1; i>=0; i--){
+        if(array[i] != 0){
+            temp = array[i];
+            array[i] = array[0];
+            array[0] = temp;   
+        }
+    }
+    return array;
+}
+console.log(moveZeroes([0,1,3,0,12]));
+
+// Join two arrays into one without creating a new array and remove all duplicates
+function joinArray(array1, array2){
+    array1 = array1.concat(array2);
+    let temp;
+    for(let i = 0; i < array1.length; i++){
+        for(let j = i + 1; j < array1.length; j++){
+            if(array1[i] > array1[j]){
+                temp = array1[i];
+                array1[i] = array1[j];
+                array1[j] = temp;
+            }
+        }
+        for(let i = 0; i < array1.length; i++){
+            for(let j = i + 1; j < array1.length; j++){
+                if(array1[i] === array1[j]){
+                    array1.splice(j--, 1);
+                }
+            }
+        }
+    }
+    return array1;
+}
+console.log(joinArray([8,6,7,5,3,0,9], [6,7,8,9,9,9,8,2,1,2]));
+
 
