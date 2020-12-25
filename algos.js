@@ -459,4 +459,71 @@ function joinArray(array1, array2){
 }
 console.log(joinArray([8,6,7,5,3,0,9], [6,7,8,9,9,9,8,2,1,2]));
 
+// Add Strings: Given two non negative integers num1 and num2 represented as a string, return the sum of num1 and num2
+function addStrings(num1, num2){
+    num1 = parseInt(num1);
+    num2 = parseInt(num2);
+    return num1 + num2;
+}
+console.log(addStrings("12", "12"));
+
+function addString(num1, num2) {
+    let s = '';
+    for (let i = num1.length - 1, j = num2.length - 1, carry = 0; i >= 0 || j >= 0 || carry === 1; i--, j--) {
+      const n1 = i < 0 ? 0 : Number(num1[i]);
+      const n2 = j < 0 ? 0 : Number(num2[j]);
+      const sum = n1 + n2 + carry;
+      s = String(sum % 10) + s;
+      carry = ~~(sum / 10);
+    }
+    return s;
+  }
+  console.log(addString("12", "12"));
+
+// check if string can be a substring of itself, aka a palindrome
+function repeatedSubstringPattern(string){
+    let pattern = "";
+    for(let i = 0; i < string.length/2; i++){
+        pattern += string[i];
+        if(pattern.repeat(string.length/pattern.length) === string){
+            return true;
+        }
+    }
+    return false;
+}
+console.log(repeatedSubstringPattern("ababa"));
+
+
+// Check to see if a string contains a substring of the otherstring
+function substring(string1, string2){
+    let pattern = "";
+    for(let i = 0; i < string1.length; i++){
+        pattern += string1[i];
+    }
+    for(let i = 0; i < string2.length; i++){
+        if(string2.includes(pattern)){
+            return true;
+        }
+    }
+    return false;
+}
+console.log(substring("tia", "heytiawhatsup"));
+
+function substring(string1, string2){
+    let char;
+    let newString = "";
+    for(let i = 0; i < string1.length; i ++){
+        for(let j = 0; j < string2.length; j++){
+            char = string1[i];
+            if(char == string2[j]){
+                newString += string2[j];
+            }
+            if(newString == string1){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+console.log(substring("fox", "thisisfox"));
 
